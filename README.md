@@ -7,3 +7,6 @@ Make sure you have docker installed and then run the below from your terminal.
 docker pull evergou/my-app
 docker run -p 8501:8501 evergou/my-app
 ```
+
+## App's UML
+![Alt text](images/UML.png)
