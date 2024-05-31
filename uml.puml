@@ -1,0 +1,83 @@
+@startuml
+skinparam class {
+    BackgroundColor White
+    BorderColor Black
+}
+
+class MainApplication {
+    - DataUploader data_uploader
+    - DataViewer data_frame_viewer
+    - DataFrame df
+    + run()
+    + load_data_tab()
+    + visualize_data_tab()
+    + classification_tab()
+    + clustering_tab()
+    + info_tab()
+}
+
+class DataUploader {
+    + upload_data() : UploadedFile
+    + read_data(uploaded_file: UploadedFile) : DataFrame
+}
+
+class DataViewer {
+    + view_data(df: DataFrame)
+    + view_table_info(df: DataFrame)
+}
+
+class DataVisualizer {
+    - DataFrame df
+    - features: DataFrame
+    - labels: Series
+    + pca_reduction()
+    + tsne_reduction()
+    + plot_2d(components: ndarray, title: str)
+    + eda_charts()
+}
+
+class Classifier {
+    - DataFrame df
+    - features: DataFrame
+    - labels: Series
+    + knn_classifier(n_neighbors: int) : Tuple[float, dict]
+    + random_forest_classifier(max_depth: int) : Tuple[float, dict]
+    + compare_classifiers()
+}
+
+class Clusterer {
+    - DataFrame df
+    - features: DataFrame
+    + kmeans_clustering(n_clusters: int) : Tuple[float, float]
+    + affinity_clustering(n_clusters: int) : Tuple[float, float]
+    + compare_clustering()
+}
+
+class InfoPresenter {
+    + show_info()
+}
+
+MainApplication --> DataUploader: uses
+MainApplication --> DataViewer: uses
+MainApplication --> DataVisualizer: uses
+MainApplication --> Classifier: uses
+MainApplication --> Clusterer: uses
+MainApplication --> InfoPresenter: uses
+
+DataVisualizer --> PCA
+DataVisualizer --> TSNE
+DataVisualizer --> matplotlib.pyplot: uses
+DataVisualizer --> altair: uses
+
+Classifier --> KNeighborsClassifier
+Classifier --> RandomForestClassifier
+Classifier --> train_test_split
+Classifier --> accuracy_score
+Classifier --> classification_report
+
+Clusterer --> KMeans
+Clusterer --> AgglomerativeClustering
+Clusterer --> AffinityPropagation
+Clusterer --> silhouette_score
+Clusterer --> davies_bouldin_score
+@enduml
