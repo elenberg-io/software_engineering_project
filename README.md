@@ -1,7 +1,7 @@
 # A Data Upload, Analytics and ML app
 Author: Elena Vergou, P2006041
 
-## How to run the app from Docker
+## How to run the app using Docker
 Make sure you have docker installed and then run the below from your terminal.
 ```
 docker pull evergou/my-app
